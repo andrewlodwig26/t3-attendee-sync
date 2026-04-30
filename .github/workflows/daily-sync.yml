@@ -4,7 +4,7 @@ on:
   schedule:
     # 7:15 AM PT (14:15 UTC), Mon-Fri
     # Offset 15 min from pacing bot so they don't collide
-    - cron: "15 14 * * 1-5"
+    - cron: "15 14,22 * * 1-5"
 
   workflow_dispatch:  # Manual trigger from GitHub UI
 
