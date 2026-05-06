@@ -87,7 +87,7 @@ def get_luma_guests():
             "pagination_limit": 25,
         }
         if cursor:
-            params["pagination_cursor"] = cursor
+            params["next_cursor"] = cursor
 
         response = requests.get(url, headers=headers, params=params)
 
@@ -147,7 +147,7 @@ def get_luma_guests():
                 "linkedin": answers.get("linkedin", ""),
             })
 
-        cursor = data.get("pagination_cursor")
+        cursor = data.get("next_cursor")
         if not cursor or len(entries) == 0:
             break
 
