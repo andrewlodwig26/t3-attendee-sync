@@ -87,7 +87,7 @@ def get_luma_guests():
             "pagination_limit": 25,
         }
         if cursor:
-            params["next_cursor"] = cursor
+            params["pagination_cursor"] = cursor
 
         response = requests.get(url, headers=headers, params=params)
 
