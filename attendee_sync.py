@@ -84,7 +84,7 @@ def get_luma_guests():
     while True:
         params = {
             "event_id": LUMA_EVENT_ID,
-            "pagination_limit": 100,
+            "pagination_limit": 25,
         }
         if cursor:
             params["pagination_cursor"] = cursor
