@@ -146,14 +146,18 @@ def sync_checkin_status(worksheet, checkin_map):
 
         if email in checkin_map:
             status = "Attended" if checkin_map[email] else "Did Not Attend"
-            row_num = i + 1  # gspread is 1-based
-            updates.append({
-                "range": f"B{row_num}",
-                "values": [[status]],
-            })
-            matched += 1
         else:
+            # Email is in the sheet but not in Luma data —
+            # they were registered, so default to Did Not Attend
+            status = "Did Not Attend"
             not_found += 1
+
+        row_num = i + 1  # gspread is 1-based
+        updates.append({
+            "range": f"B{row_num}",
+            "values": [[status]],
+        })
+        matched += 1
 
     if not updates:
         print("  No status updates needed.")
