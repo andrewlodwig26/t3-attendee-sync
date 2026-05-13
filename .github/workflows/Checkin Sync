@@ -1,0 +1,28 @@
+name: Check-In Status Sync
+
+on:
+  workflow_dispatch: # Manual trigger only — run this post-event
+
+jobs:
+  sync-checkins:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run check-in sync
+        env:
+          LUMA_API_KEY: ${{ secrets.LUMA_API_KEY }}
+          LUMA_EVENT_ID: ${{ secrets.LUMA_EVENT_ID }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+          GOOGLE_SHEETS_CREDENTIALS: ${{ secrets.GOOGLE_SHEETS_CREDENTIALS }}
+        run: python checkin_sync.py
